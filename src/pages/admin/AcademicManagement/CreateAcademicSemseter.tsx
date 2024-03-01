@@ -6,9 +6,15 @@ import { semesterOptions } from "../../../constants/semesterOptions";
 import { monthOptions } from "../../../constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../shemas/academic.management.schema";
+import { toast } from "sonner";
+import { useCreateAcademicSemesterMutation } from "../../../redux/feather/admin/academicManagement.api";
+import { TResponse } from "../../../types";
 
 const CreateAcademicSemseter = () => {
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const [createAcademicSemseter] = useCreateAcademicSemesterMutation();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
+
     const name = semesterOptions[Number(data?.name) - 1]?.label;
 
     const semesterDate = {
@@ -18,7 +24,17 @@ const CreateAcademicSemseter = () => {
       startMonth: data.startMonth,
       endMonth: data.endMonth,
     };
-    console.log(semesterDate);
+
+    try {
+      const res = (await createAcademicSemseter(semesterDate)) as TResponse;
+      if (res?.error) {
+        toast.error(res?.error.data.message, { id: toastId });
+      } else {
+        toast.success("semester is created", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("something is error", { id: toastId });
+    }
   };
 
   const currentYear = new Date().getFullYear();
