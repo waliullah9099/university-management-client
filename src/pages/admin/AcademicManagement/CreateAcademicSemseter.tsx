@@ -2,7 +2,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import PhForm from "../../../components/form/PhForm";
 import { Button, Col, Flex } from "antd";
 import PhSelect from "../../../components/form/PhSelect";
-import { semesterOptions } from "../../../constants/semesterOptions";
+import { semesterOptions } from "../../../constants/semesters";
 import { monthOptions } from "../../../constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../shemas/academic.management.schema";

@@ -31,7 +31,15 @@ const Sidebar = () => {
   }
 
   return (
-    <Sider style={{ height: "100vh", position: "sticky", top: 0, left: 0 }}>
+    <Sider
+      style={{
+        height: "100vh",
+        position: "sticky",
+        top: 0,
+        left: 0,
+        overflow: "scroll",
+      }}
+    >
       <div
         style={{
           color: "white",

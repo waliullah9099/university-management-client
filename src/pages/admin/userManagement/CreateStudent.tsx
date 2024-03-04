@@ -115,8 +115,9 @@ const CreateStudent = () => {
     };
 
     const formData = new FormData();
-    formData.append("data", JSON.stringify(studentData));
+
     formData.append("file", data.image);
+    formData.append("data", JSON.stringify(studentData));
 
     createStudent(formData);
 
@@ -152,6 +153,7 @@ const CreateStudent = () => {
                       type="file"
                       value={value?.fileName}
                       {...field}
+                      size="large"
                       onChange={(e) => onChange(e.target.files?.[0])}
                     />
                   </Form.Item>
